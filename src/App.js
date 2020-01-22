@@ -1,25 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Navbar from './components/common/navbar';
+import LeftMenu from './components/common/left-menu';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import Dashboard from './components/dashboard';
+import Contracts from './components/contracts';
+import Invoices from './components/invoices';
+import Customers from './components/customers';
+import Notifications from './components/notifications';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <React.Fragment>
+    <Navbar />
+    <div className="container-fluid">
+      <div className="row mt-3">
+        <div className="col-2" style={{minWidth:130}}>
+          <LeftMenu />
+        </div>
+        <Switch>
+          <div className="col-10">
+            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/contracts" component={Contracts} />
+            <Route path="/invoices" component={Invoices} />
+            <Route path="/customers" component={Customers} />
+            <Route path="/notifications" component={Notifications} />
+            <Redirect from="/" to="/dashboard" />
+          </div>
+        </Switch>
+      </div>
     </div>
+    </React.Fragment>
   );
 }
 
